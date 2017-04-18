@@ -1,29 +1,34 @@
-import _ from 'lodash';
-import assert from 'assert';
-import vorpalBuilder from 'vorpal';
-import commands, { env } from '../../src/commands/generate';
+import { expect } from 'chai';
+import generate from '../../src/commands/generate';
+import program from 'commander';
 
-describe('feathers-cli', () => {
+describe('command:generate', () => {
+  let command;
 
-  const vorpal = vorpalBuilder();
-  commands(vorpal);
+  before(() => {
+    generate(program);
+    command = program.commands
+      .filter(c => c.name() === 'generate')
+      .reduce(c => !!c);
+  });
 
-  describe('generator-feathers registration', () => {
-    it('has registered the generator name', () => {
-      assert(_.includes(env.getGeneratorNames(), 'feathers'));
-    });
+  it('registers the command', () => {
+    expect(command).to.not.equal(undefined);
+  });
 
-    it('registers all namespaces', () => {
-      let expected = [
-        'feathers:app',
-        'feathers:hook',
-        'feathers:middleware',
-        'feathers:model',
-        'feathers:service',
-        'feathers:plugin'
-      ];
+  it('has force option', () => {
+    const option = command.options
+      .filter(o => o.long === '--force')
+      .reduce(o => !!o);
 
-      assert.equal(_.difference(expected, env.namespaces()).length, 0, `namespaces() is incomplete: ${env.namespaces()}`);
-    });
+    expect(option).to.not.equal(undefined);
+  });
+
+  it('has a path option', () => {
+    const option = command.options
+      .filter(o => o.long === '--path')
+      .reduce(o => !!o);
+
+    expect(option).to.not.equal(undefined);
   });
 });
