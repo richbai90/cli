@@ -2,7 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/feathersjs/cli.svg)](https://greenkeeper.io/)
 
-> The command line interface for Feathers applications
+> The command line interface for Feathers applications, updated to use the feathers-generator-namespace module
 
 [![Build Status](https://img.shields.io/travis/feathersjs/cli/master.svg)](https://travis-ci.org/feathersjs/cli)
 [![Test Coverage](https://codeclimate.com/github/feathersjs/cli/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/cli/coverage)
